@@ -34,7 +34,7 @@ Before starting Mopidy, you must add configuration for
 Mopidy-SaveStatePeriod to your Mopidy configuration file::
 
     [savestateperiod]
-    # TODO: Add example of extension config
+    period = <number of seconds to refresh the state>
 
 
 Project resources
