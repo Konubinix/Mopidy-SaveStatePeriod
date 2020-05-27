@@ -17,7 +17,10 @@ class SaveStatePeriodFrontend(pykka.ThreadingActor, core.CoreListener):
     def on_start(self):
         GLib.timeout_add_seconds(self.config["savestateperiod"]["period"], self.periodic_save_state)
 
-    def periodic_save_state(self):
+    def save_state(self):
         call = ProxyCall(attr_path=["_save_state"], args=[], kwargs={})
         self.core.actor_ref.ask(call, block=True)
+
+    def periodic_save_state(self):
+        self.save_state()
         GLib.timeout_add_seconds(self.config["savestateperiod"]["period"], self.periodic_save_state)
